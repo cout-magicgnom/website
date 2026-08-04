@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta name="description" content="Personal Website: general Mayhem">
+    <meta name="keywords" content="MELO, server, projects, retro, 80's, 90's, computers, PC, DOS, Windows 3.1, nostalgia, retro-modern, electronics, vintage, classic, github">
+    <meta name="author" content="MELO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <style>
+body {
+  font-family: 'Tahoma', monospace;
+  background-color: rgb(0, 0, 0);
+  background-image: url("../../images/wallpaper.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+} 
+.navbar {
+  overflow: hidden;
+  background-color: #fdff7f96;
+  background-image: linear-gradient(hsl(303, 100%, 38%), #ffffff00);
+  border-radius: 10px; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: bold;
+  text-shadow: 2px 2px #00000000;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  text-shadow: 2px 2px #00ff0d00;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: rgb(0, 0, 0);
+  background-color: #e7e43f;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #e7e43f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(104, 0, 95);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  text-shadow: 2px 2px rgba(128, 128, 128, 0);
+}
+
+.dropdown-content a:hover {
+  background-color: #ff48f05e;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Document Style Integrations */
+.doc-container {
+  text-align: left;
+  padding: 10px;
+  color: #fbffbe;
+}
+
+.doc-container h1 {
+  color: #00ffff;
+  border-bottom: 2px solid #0095a0;
+  padding-bottom: 5px;
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+.doc-container h2 {
+  color: #ff79c6;
+  border-bottom: 1px dashed #0095a0;
+  padding-bottom: 3px;
+  margin-top: 25px;
+  font-size: 1.2em;
+}
+
+.doc-container h3 {
+  color: #50fa7b;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1.05em;
+}
+
+.doc-container code {
+  background-color: #1a1c23;
+  color: #f1fa8c;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #50fa7b;
+  padding: 12px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.function-block {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #00ffff;
+  padding: 12px 15px;
+  margin: 15px 0;
+}
+
+.note {
+  background-color: rgba(255, 184, 108, 0.15);
+  border-left: 4px solid #ffb86c;
+  color: #ffb86c;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+.doc-container ul {
+  padding-left: 20px;
+}
+
+.doc-container li {
+  margin-bottom: 4px;
+}
+</style> 
+    <title>MELO's World - Practical Guide to video.h</title>
+  </head>
+  <body style="color: #fbffbe;" vlink="#FF0000" link="#FF5733" alink="#FF5733">
+
+    <div class="navbar">
+      <a href="../../index.html"><img src="../../images/Home.png"><br>Home</a>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Vpc.png"><br>Servers <i class="fa fa-caret-down"></i></button>
+
+        <div class="dropdown-content"> 
+          <a href="computer/mycomputers.html">My Computers</a> 
+          <a href="computer/documents.html">Documents</a> 
+          <a href="computer/downloads.html">Downloads</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Modtech.png"><br>Projects <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content"> 
+          <a href="../myprojects.html">My Projects</a> 
+          <a href="../documents.html">Documents</a> 
+          <a href="../downloads.html">Downloads</a>
+        </div>
+      </div>
+      <a href="links.html"><img src="../../images/Links.png"><br>Links</a>
+      <a href="mailto:m310@proton.me"><img src="../../images/Email.png"><br>E-mail</a> 
+    </div>
+
+    <center><br></center>
+    <hr>
+
+    <table style="width: 80%; margin: 0 auto;" border="2">
+      <tbody>
+        <tr align="center">
+          <td style="background-color: #0095a0e3;"><strong>.RAW - Practical Guide to video.h (libnds)</strong></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 23, 39, 0.85);">
+            <div class="doc-container">
+              <p><b><u>03/2026</u></b> - Nintendo DS Video Subsystem Documentation</p>
+              
+              <h1>Practical Guide to video.h (libnds)</h1>
+              <p>The Nintendo DS graphics processor features two rendering units (called Engines):</p>
+              <ul>
+                <li><strong>Main Engine (Engine A):</strong> Supports 2D graphics and the 3D engine.</li>
+                <li><strong>Sub Engine (Engine B):</strong> Supports 2D graphics only.</li>
+              </ul>
+
+              <h2>1. Video Mode Configuration</h2>
+
+              <div class="function-block">
+                <h3><code>videoSetMode(uint32 mode)</code></h3>
+                <p><strong>What it does:</strong> Configures the display mode and enables/disables layers (backgrounds and sprites) on the Main Engine (Engine A / Main Screen).</p>
+                <p><strong>How to use:</strong> Called during game initialization to define how the main screen will operate (whether using simple 2D graphics, 3D, or direct framebuffer) and which elements will be visible.</p>
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                  <li><code>mode (uint32)</code>: A bitmask. You combine different constants using the bitwise OR operator (<code>|</code>).
+                    <ul>
+                      <li><strong>Display Modes (Choose 1):</strong>
+                        <ul>
+                          <li><code>MODE_0_2D</code> to <code>MODE_5_2D</code>: Defines the background (BG) mode. <code>MODE_0_2D</code> allows 4 text backgrounds; <code>MODE_5_2D</code> allows advanced rotation/scaling.</li>
+                          <li><code>MODE_FB0</code> to <code>MODE_FB3</code>: Direct Framebuffer mode (writes pixels directly to VRAM).</li>
+                          <li><code>MODE_FIFO</code>: Enables the 3D engine display.</li>
+                        </ul>
+                      </li>
+                      <li><strong>Layer Activation (Combine as needed):</strong>
+                        <ul>
+                          <li><code>DISPLAY_BG0_ACTIVE</code>, <code>DISPLAY_BG1_ACTIVE</code>, <code>DISPLAY_BG2_ACTIVE</code>, <code>DISPLAY_BG3_ACTIVE</code>: Activate the respective background layers.</li>
+                          <li><code>DISPLAY_SPRITE_ACTIVE</code>: Enables sprite rendering (2D characters/objects).</li>
+                          <li><code>DISPLAY_SPRITE_1D</code>: Sets sprite memory to be organized linearly in 1D (easier to program).</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <p><strong>Example usage:</strong></p>
+<pre><code>// Configures Mode 0 2D on the main screen and enables Background 0 and Sprites
+videoSetMode(MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_SPRITE_ACTIVE | DISPLAY_SPRITE_1D);</code></pre>
+              </div>
+
+              <div class="function-block">
+                <h3><code>videoSetModeSub(uint32 mode)</code></h3>
+                <p><strong>What it does:</strong> Configures the display mode and enables layers on the Secondary Engine (Sub / Screen B).</p>
+                <p><strong>How to use:</strong> Works exactly like <code>videoSetMode</code>, but affects only the sub screen.</p>
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                  <li><code>mode (uint32)</code>: Combination of constants identical to <code>videoSetMode</code>.</li>
+                </ul>
+                <div class="note">
+                  <strong>Note:</strong> The Sub Engine does not support 3D modes or direct framebuffers. Use only 2D modes (<code>MODE_0_2D</code> to <code>MODE_5_2D</code>).
+                </div>
+                <p><strong>Example usage:</strong></p>
+<pre><code>// Configures the secondary screen for Mode 0 2D with only Background 0 active
+videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);</code></pre>
+              </div>
+
+              <h2>2. VRAM Memory Management</h2>
+              <p>The Nintendo DS has several VRAM memory banks (A, B, C, D, E, F, G, H, I). For the video hardware to render anything, you need to "map" (assign) these memory banks to a specific function.</p>
+
+              <div class="function-block">
+                <h3><code>vramSetBankA(VRAM_A_TYPE mode)</code></h3>
+                <p><em>(There are equivalent functions for the other banks: <code>vramSetBankB</code>, <code>vramSetBankC</code>, etc.)</em></p>
+                <p><strong>What it does:</strong> Assigns VRAM Bank A (128 KB) to a specific graphics purpose (Backgrounds, Sprites, 3D Textures, etc.).</p>
+                <p><strong>How to use:</strong> Must be called before attempting to load any image or palette into memory.</p>
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                  <li><code>mode (VRAM_A_TYPE)</code>: An enum value specifying the destination of the memory bank.
+                    <ul>
+                      <li><code>VRAM_A_MAIN_BG</code>: Allocates this bank for Main Engine Backgrounds.</li>
+                      <li><code>VRAM_A_MAIN_SPRITE</code>: Allocates this bank to store Main Engine Sprite images.</li>
+                      <li><code>VRAM_A_TEXTURE</code>: Allocates this bank to store 3D engine textures.</li>
+                      <li><code>VRAM_A_SUB_BG</code>: Allocates this bank for Sub Engine Backgrounds.</li>
+                      <li><code>VRAM_A_LCD</code>: Disconnects the bank from the graphics engine, allowing direct CPU read/write access.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p><strong>Example usage:</strong></p>
+<pre><code>// Allocates Bank A for main screen backgrounds
+vramSetBankA(VRAM_A_MAIN_BG);
+
+// Allocates Bank B for main screen sprites
+vramSetBankB(VRAM_B_MAIN_SPRITE);
+
+// Allocates Bank C for secondary screen backgrounds
+vramSetBankC(VRAM_C_SUB_BG);</code></pre>
+              </div>
+
+              <h2>3. Physical Screen Control and Swapping</h2>
+              <p>By default, the Main Engine renders on the TOP screen, and the Sub Engine renders on the BOTTOM (Touch) screen.</p>
+
+              <div class="function-block">
+                <h3><code>lcdMainOnBottom()</code></h3>
+                <p><strong>What it does:</strong> Inverts the physical display. Maps the Main Engine (A) to the bottom screen (Touch) and the Sub Engine (B) to the top screen.</p>
+                <p><strong>How to use:</strong> Simple call without arguments whenever you want to run 3D or advanced graphics on the touch screen.</p>
+                <p><strong>Parameters:</strong> None.</p>
+              </div>
+
+              <div class="function-block">
+                <h3><code>lcdMainOnTop()</code></h3>
+                <p><strong>What it does:</strong> Restores the default behavior (Main Engine on top, Sub Engine on bottom).</p>
+                <p><strong>Parameters:</strong> None.</p>
+                <p><strong>Example usage:</strong></p>
+<pre><code>lcdMainOnBottom(); // Engine A now renders on the bottom screen</code></pre>
+              </div>
+
+              <h2>4. Dynamic Layer Activation and Deactivation</h2>
+              <p>Instead of reconfiguring the entire video mode with <code>videoSetMode</code>, you can turn individual layers on and off at runtime.</p>
+
+              <div class="function-block">
+                <h3><code>videoBgEnable(uint32 flags)</code> / <code>videoBgEnableSub(uint32 flags)</code></h3>
+                <p><strong>What it does:</strong> Enables one or more background layers that were hidden.</p>
+                <p><strong><code>flags</code> parameter (<code>uint32</code>):</strong> The layers to enable combined with <code>|</code>.</p>
+                <p><strong>Options:</strong> <code>DISPLAY_BG0_ACTIVE</code>, <code>DISPLAY_BG1_ACTIVE</code>, <code>DISPLAY_BG2_ACTIVE</code>, <code>DISPLAY_BG3_ACTIVE</code>.</p>
+              </div>
+
+              <div class="function-block">
+                <h3><code>videoBgDisable(uint32 flags)</code> / <code>videoBgDisableSub(uint32 flags)</code></h3>
+                <p><strong>What it does:</strong> Hides/disables specific background layers.</p>
+                <p><strong><code>flags</code> parameter (<code>uint32</code>):</strong> The layers to disable combined with <code>|</code>.</p>
+                <p><strong>Example usage:</strong></p>
+<pre><code>// Temporarily hides background 0 on the main screen (e.g., to pause the game)
+videoBgDisable(DISPLAY_BG0_ACTIVE);
+
+// Re-enables background 0
+videoBgEnable(DISPLAY_BG0_ACTIVE);</code></pre>
+              </div>
+
+              <h2>Complete C Initialization Example</h2>
+              <p>Below is functional C code demonstrating how to bring these basic commands together to prepare the Nintendo DS to render graphics:</p>
+
+<pre><code>#include &lt;nds.h&gt;
+
+void inicializarVideo(void) {
+    // 1. Map VRAM memory banks
+    vramSetBankA(VRAM_A_MAIN_BG);     // Bank A -&gt; Main screen Backgrounds
+    vramSetBankB(VRAM_B_MAIN_SPRITE); // Bank B -&gt; Main screen Sprites
+    vramSetBankC(VRAM_C_SUB_BG);      // Bank C -&gt; Sub screen Backgrounds
+
+    // 2. Configure Main Screen video mode
+    // Uses Mode 0 2D, enables BG0, and enables Sprites in 1D mode
+    videoSetMode(MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_SPRITE_ACTIVE | DISPLAY_SPRITE_1D);
+
+    // 3. Configure Sub Screen video mode
+    // Uses Mode 0 2D and enables BG0
+    videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);
+
+    // 4. Optional: Assign the Main Engine to the bottom screen
+    lcdMainOnBottom();
+}
+
+int main(void) {
+    inicializarVideo();
+
+    while(1) {
+        swiWaitForVBlank(); // Waits for vertical screen synchronization
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <center><small>©2026 MELO</small></center>
+  </body>
+</html>

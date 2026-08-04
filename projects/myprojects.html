@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="”screen”">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta name="description" content="Personal Website: general Mayhem">
+    <meta name="keywords" content="MELO, server, projects, retro, 80's, 90's, computers, PC, DOS, Windows 3.1, nostalgia, retro-modern, electronics, vintage, classic, github">
+    <meta name="author" content="MELO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <style>
+body {
+  font-family: 'Tahoma', monospace;
+  background-color: rgb(0, 0, 0);
+  background-image: url("../images/wallpaper.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+} 
+.navbar {
+  overflow: hidden;
+  background-color: #fdff7f96;
+  background-image: linear-gradient(hsl(303, 100%, 38%), #ffffff00);
+  border-radius: 10px; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: bold;
+  text-shadow: 2px 2px #00000000;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  text-shadow: 2px 2px #00ff0d00;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: rgb(0, 0, 0);
+  background-color: #e7e43f;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #e7e43f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(104, 0, 95);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  text-shadow: 2px 2px rgba(128, 128, 128, 0);
+}
+
+.dropdown-content a:hover {
+  background-color: #ff48f05e;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style> <title>MELO's World</title>
+  </head>
+  <body style="  color: #fbffbe;" vlink="#FF0000" link="#FF5733" alink="#FF5733">
+
+
+    
+    <div class="navbar">
+    <a href="../index.html"><img src="../images/Home.png"><br>Home</a>
+      <div class="dropdown"> 
+      </div>
+
+      <div class="dropdown"> <button class="dropbtn"><img src="../images/Vpc.png"><br>Servers <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content"> 
+          <a href="computer/mycomputers.html">My Computers</a> 
+          <a href="computer/documents.html">Documents</a> 
+          <a href="computer/downloads.html">Downloads</a>
+        </div>
+      </div>
+      
+      <div class="dropdown"> <button class="dropbtn"><img src="../images/Modtech.png"><br>Projects<i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content"> 
+          <a href="../projects/myprojects.html">My Projects</a> 
+          <a href="../projects/documents.html">Documents</a> 
+          <a href="../projects/downloads.html">Downloads</a>
+        </div>
+      </div>
+      <!--
+      <div class="dropdown"> <button class="dropbtn"><img src="Gaming.png"><br>Workshop <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content"> 
+          <a href="gaming/2600.html">VR Chat</a> 
+          <a href="gaming/pc.html">3D Art</a> </div>
+      </div>
+      -->
+      <a href="links.html"><img src="../images/Links.png"><br>Links</a>
+      <a href="mailto:m310@proton.me"><img src="../images/Email.png"><br>E-mail</a> </div>
+                 
+
+      
+      <center><br></center>
+
+      <hr>
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>.PS1 DDOS DEFENDER</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>10/2025</u></b> - This PowerShell script is a simple automated DDoS defender that 
+                monitors TCP, ICMP (ping) and UDP endpoint 
+                connections in an infinite loop, logs events to a log file ($logPath, default: Desktop\log_ddos.txt), and
+                blocks suspicious IPs by creating firewall rules via New-NetFirewallRule (storing blocked IPs in
+                $ipsBloqueados), in addition to beeping and displaying an alert box when blocking; to use it, save the
+                contents as ddos_defense.ps1 and run it in a PowerShell run as Administrator (for example: powershell
+                -ExecutionPolicy Bypass -File .\ddos_defense.ps1), as it creates firewall rules and queries system
+                resources; to configure, edit the $logPath, $limiteConexoesTCP, $limitePingICMP and $limiteUDP variables
+                at the top of the file according to your tolerance needs before running (or redirect the log), and stop
+                the script with Ctrl+C when you want to stop. <a href="https://github.com/cout-magicgnom/DDoS-Defense-script">Click Me!</a>
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>PYTHON BACKUP SCRIPT</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>4/2026</u></b> - This script is an interactive command-line tool developed in Python for 
+                batch copying files from one directory to another. Its operation occurs through a guided walkthrough 
+                where the system asks the user for the path to the source folder, lists the content found and requires 
+                a security confirmation before proceeding. After approval and insertion of the destination folder path, 
+                the tool uses the native libraries pathlib and shutil to read the home folder and automatically 
+                transfer all its files, displaying a real-time log in the terminal detailing each successfully copied 
+                item. <a href="https://github.com/cout-magicgnom/backup-python-script">Click Me!</a>
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>MALWARE KNOWLEDGE</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>03/2026</u></b> - This script is a malicious program (malware) known as Reverse Shell, 
+                designed to provide an attacker with remote control over the victim's computer. The tool 
+                initially works by moving your own file to a temporary system folder (as a form of hiding) 
+                and opens a PDF file in the browser to trick the user, creating a distraction while running 
+                in the background. The code then establishes a direct network connection to the attacker's 
+                IP address and port and enters a continuous cycle: it waits to receive remote commands, 
+                executes them silently in the victim's operating system terminal, and finally sends the 
+                results or possible error messages back to the server of whoever is controlling it. 
+                <a href="https://github.com/cout-magicgnom/simple-reverse-shell">Click Me!</a>
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>ALGORITHM ANALYSIS</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>05/2026</u></b> - This C script is an automatic language detector based on 
+                statistical analysis, designed to identify whether a text is written in Portuguese, 
+                English or Esperanto. The tool works by counting the number of each letter present 
+                in the sentence typed by the user and transforming this numerical data into 
+                percentage frequencies. She then compares this distribution with an internal table 
+                that contains the expected pattern of letter usage for each of the three languages, 
+                calculating the difference (or "margin of error") between them. The language that 
+                presents the smallest statistical variation in relation to the text entered is 
+                declared the winner, using the frequency of the letters as a kind of "fingerprint" 
+                to guess the correct language. 
+                <a href="https://github.com/cout-magicgnom/language-detector">Click Me!</a>
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>LEGACY DB UPDATE</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>05/2026</u></b> - This project is an update of a Legacy database made in Java. 
+                The primary goal of this project was to replace the legacy database of a fictional 
+                school into a new database system. In this project, to replace the old database, new 
+                data structures were implemented to satisfy the dependencies of the school's new 
+                database. To this end, the old textile data structure was replaced with linked queues 
+                related to Nodes, which contain all the information needed for queries from students 
+                enrolled at the institution, as well as visual updates that improved the organization 
+                and efficiency of student queries.
+                <a href="https://github.com/cout-magicgnom/school-db">Click Me!</a>
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+    </section>
+    
+
+
+    
+    <center><small>©2026 MELO</small></center>
+    
+  </body>
+</html>
