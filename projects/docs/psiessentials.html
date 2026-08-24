@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta name="description" content="Personal Website: general Mayhem">
+    <meta name="keywords" content="MELO, server, projects, retro, 80's, 90's, computers, PC, DOS, Windows 3.1, nostalgia, retro-modern, electronics, vintage, classic, github">
+    <meta name="author" content="MELO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <style>
+body {
+  font-family: 'Tahoma', monospace;
+  background-color: rgb(0, 0, 0);
+  background-image: url("../../images/wallpaper.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+} 
+.navbar {
+  overflow: hidden;
+  background-color: #fdff7f96;
+  background-image: linear-gradient(hsl(303, 100%, 38%), #ffffff00);
+  border-radius: 10px; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: bold;
+  text-shadow: 2px 2px #00000000;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  text-shadow: 2px 2px #00ff0d00;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: rgb(0, 0, 0);
+  background-color: #e7e43f;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #e7e43f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(104, 0, 95);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  text-shadow: 2px 2px rgba(128, 128, 128, 0);
+}
+
+.dropdown-content a:hover {
+  background-color: #ff48f05e;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Document Style Integrations */
+.doc-container {
+  text-align: left;
+  padding: 10px;
+  color: #fbffbe;
+}
+
+.doc-container h1 {
+  color: #00ffff;
+  border-bottom: 2px solid #0095a0;
+  padding-bottom: 5px;
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+.doc-container h2 {
+  color: #ff79c6;
+  border-bottom: 1px dashed #0095a0;
+  padding-bottom: 3px;
+  margin-top: 25px;
+  font-size: 1.2em;
+}
+
+.doc-container h3 {
+  color: #50fa7b;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1.05em;
+}
+
+.doc-container code {
+  background-color: #1a1c23;
+  color: #f1fa8c;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #50fa7b;
+  padding: 12px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.function-block {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #00ffff;
+  padding: 12px 15px;
+  margin: 15px 0;
+}
+
+.note {
+  background-color: rgba(255, 184, 108, 0.15);
+  border-left: 4px solid #ffb86c;
+  color: #ffb86c;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+.doc-container ul {
+  padding-left: 20px;
+}
+
+.doc-container li {
+  margin-bottom: 4px;
+}
+</style> 
+    <title>MELO's World - Practical Guide to video.h</title>
+  </head>
+  <body style="color: #fbffbe;" vlink="#FF0000" link="#FF5733" alink="#FF5733">
+
+    <div class="navbar">
+      <a href="../../index.html"><img src="../../images/Home.png"><br>Home</a>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Vpc.png"><br>Servers <i class="fa fa-caret-down"></i></button>
+
+        <div class="dropdown-content"> 
+          <a href="computer/mycomputers.html">My Computers</a> 
+          <a href="computer/documents.html">Documents</a> 
+          <a href="computer/downloads.html">Downloads</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Modtech.png"><br>Projects <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content"> 
+          <a href="../myprojects.html">My Projects</a> 
+          <a href="../documents.html">Documents</a> 
+          <a href="../downloads.html">Downloads</a>
+        </div>
+      </div>
+      <a href="links.html"><img src="../../images/Links.png"><br>Links</a>
+      <a href="mailto:m310@proton.me"><img src="../../images/Email.png"><br>E-mail</a> 
+    </div>
+
+    <center><br></center>
+    <hr>
+
+    <table style="width: 80%; margin: 0 auto;" border="2">
+      <tbody>
+        <tr align="center">
+          <td style="background-color: #0095a0e3;"><strong>.ps1 - PowerShell Cmdlets </strong></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 23, 39, 0.85);">
+            <div class="doc-container">
+              <p><b><u>08/2026</u></b> - Essential PowerShell Cmdlets </p>
+              
+              <article>
+
+    <header>
+        <h1>Essential PowerShell Cmdlets: A Practical Guide for Windows Administration and Security</h1>
+
+        <p class="intro">
+            PowerShell is one of the most powerful tools available for managing and
+            automating Windows systems. Unlike the traditional Command Prompt,
+            PowerShell works primarily with <strong>objects</strong>, making it especially
+            useful for system administration, automation, troubleshooting, and cybersecurity.
+        </p>
+
+        <p class="intro">
+            In this guide, we'll cover the most important PowerShell cmdlets and concepts
+            you should know when starting to work with PowerShell, particularly from a
+            <strong>Windows administration and security perspective</strong>.
+        </p>
+    </header>
+
+
+    <!-- What is a Cmdlet -->
+
+    <section>
+        <h2>What is a PowerShell Cmdlet?</h2>
+
+        <p>
+            A <strong>cmdlet</strong> (pronounced "command-let") is a lightweight command
+            built into PowerShell. Most cmdlets follow a simple naming convention:
+        </p>
+
+        <pre><code>Verb-Noun</code></pre>
+
+        <p>For example:</p>
+
+        <pre><code>Get-Process
+Get-Service
+Start-Process
+Stop-Process</code></pre>
+
+        <p>
+            The verb describes the action, while the noun describes the object being manipulated.
+        </p>
+
+        <ul>
+            <li><code>Get</code> — retrieve information</li>
+            <li><code>Set</code> — modify a configuration</li>
+            <li><code>New</code> — create something</li>
+            <li><code>Remove</code> — delete something</li>
+            <li><code>Start</code> — start something</li>
+            <li><code>Stop</code> — stop something</li>
+            <li><code>Restart</code> — restart something</li>
+        </ul>
+    </section>
+
+
+    <!-- Getting Help -->
+
+    <section>
+        <h2>Getting Help and Discovering Commands</h2>
+
+        <p>
+            Before memorizing hundreds of commands, you should learn how to
+            <strong>discover commands yourself</strong>.
+        </p>
+
+        <h3>Get-Command</h3>
+
+        <p>
+            Lists available commands or searches for commands matching a pattern.
+        </p>
+
+        <pre><code>Get-Command</code></pre>
+
+        <p>For example:</p>
+
+        <pre><code>Get-Command *process*</code></pre>
+
+        <p>
+            This searches for commands related to processes.
+        </p>
+
+        <h3>Get-Help</h3>
+
+        <p>
+            Provides documentation and usage information for a cmdlet.
+        </p>
+
+        <pre><code>Get-Help Get-Process</code></pre>
+
+        <p>For more detailed information:</p>
+
+        <pre><code>Get-Help Get-Process -Full</code></pre>
+
+        <h3>Get-Member</h3>
+
+        <p>
+            One of the most useful commands for understanding how PowerShell works
+            with objects.
+        </p>
+
+        <pre><code>Get-Process | Get-Member</code></pre>
+
+        <p>
+            It displays the properties and methods available for the objects returned
+            by <code>Get-Process</code>.
+        </p>
+    </section>
+
+
+    <!-- Processes -->
+
+    <section>
+        <h2>Managing Processes</h2>
+
+        <p>
+            Processes are a fundamental part of Windows administration and security monitoring.
+        </p>
+
+        <h3>Get-Process</h3>
+
+        <p>Lists currently running processes:</p>
+
+        <pre><code>Get-Process</code></pre>
+
+        <p>You can search for a specific process:</p>
+
+        <pre><code>Get-Process -Name powershell</code></pre>
+
+        <p>You can also filter processes:</p>
+
+        <pre><code>Get-Process | Where-Object {$_.CPU -gt 100}</code></pre>
+
+        <h3>Stop-Process</h3>
+
+        <p>Terminates a process:</p>
+
+        <pre><code>Stop-Process -Name notepad</code></pre>
+
+        <h3>Start-Process</h3>
+
+        <p>Starts an application or executable:</p>
+
+        <pre><code>Start-Process notepad</code></pre>
+
+        <p>
+            These commands can be particularly useful when investigating suspicious
+            processes or automating administrative tasks.
+        </p>
+    </section>
+
+
+    <!-- Services -->
+
+    <section>
+        <h2>Managing Windows Services</h2>
+
+        <p>
+            Windows services are another important area for both system administration
+            and security.
+        </p>
+
+        <h3>Get-Service</h3>
+
+        <p>Lists installed services:</p>
+
+        <pre><code>Get-Service</code></pre>
+
+        <p>You can filter services by status:</p>
+
+        <pre><code>Get-Service | Where-Object {$_.Status -eq "Stopped"}</code></pre>
+
+        <h3>Starting, stopping and restarting services</h3>
+
+        <pre><code>Start-Service wuauserv</code></pre>
+
+        <pre><code>Stop-Service wuauserv</code></pre>
+
+        <pre><code>Restart-Service wuauserv</code></pre>
+
+        <p>
+            Depending on the PowerShell version and object properties available,
+            you can also inspect services based on their startup configuration.
+        </p>
+    </section>
+
+
+    <!-- System Information -->
+
+    <section>
+        <h2>Gathering System Information</h2>
+
+        <h3>Get-ComputerInfo</h3>
+
+        <p>
+            Provides detailed information about the computer:
+        </p>
+
+        <pre><code>Get-ComputerInfo</code></pre>
+
+        <p>
+            For more specific system information,
+            <code>Get-CimInstance</code> is also extremely useful.
+        </p>
+
+        <pre><code>Get-CimInstance Win32_OperatingSystem</code></pre>
+
+        <p>
+            This can be useful when building scripts that need to identify the operating
+            system, version, configuration, or other system properties.
+        </p>
+    </section>
+
+
+    <!-- Files -->
+
+    <section>
+        <h2>Working with Files and Directories</h2>
+
+        <h3>Get-ChildItem</h3>
+
+        <p>Lists files and directories:</p>
+
+        <pre><code>Get-ChildItem C:\</code></pre>
+
+        <h3>Set-Location</h3>
+
+        <p>Changes the current directory:</p>
+
+        <pre><code>Set-Location C:\Windows</code></pre>
+
+        <h3>Copy-Item</h3>
+
+        <p>Copies files or directories:</p>
+
+        <pre><code>Copy-Item file.txt C:\Temp</code></pre>
+
+        <h3>Move-Item</h3>
+
+        <p>Moves files:</p>
+
+        <pre><code>Move-Item file.txt C:\Temp</code></pre>
+
+        <h3>Remove-Item</h3>
+
+        <p>Removes files or directories:</p>
+
+        <pre><code>Remove-Item file.txt</code></pre>
+
+        <h3>Get-Content</h3>
+
+        <p>Reads the contents of a file:</p>
+
+        <pre><code>Get-Content log.txt</code></pre>
+
+        <p>
+            These commands are particularly useful when analyzing logs or automating
+            system maintenance.
+        </p>
+    </section>
+
+
+    <!-- Users -->
+
+    <section>
+        <h2>User and Group Management</h2>
+
+        <p>
+            When performing security audits, checking local accounts and privileged
+            groups is essential.
+        </p>
+
+        <h3>Get-LocalUser</h3>
+
+        <p>Lists local user accounts:</p>
+
+        <pre><code>Get-LocalUser</code></pre>
+
+        <h3>Get-LocalGroup</h3>
+
+        <p>Lists local groups:</p>
+
+        <pre><code>Get-LocalGroup</code></pre>
+
+        <h3>Get-LocalGroupMember</h3>
+
+        <p>
+            To check members of the local Administrators group:
+        </p>
+
+        <pre><code>Get-LocalGroupMember Administrators</code></pre>
+
+        <p>
+            This is particularly useful during security assessments because excessive
+            membership in privileged groups can increase the attack surface of a system.
+        </p>
+    </section>
+
+
+    <!-- Network -->
+
+    <section>
+        <h2>Network Information</h2>
+
+        <h3>Get-NetIPAddress</h3>
+
+        <p>
+            Displays IP addresses configured on the system:
+        </p>
+
+        <pre><code>Get-NetIPAddress</code></pre>
+
+        <h3>Get-NetIPConfiguration</h3>
+
+        <p>
+            Displays network configuration:
+        </p>
+
+        <pre><code>Get-NetIPConfiguration</code></pre>
+
+        <h3>Get-NetTCPConnection</h3>
+
+        <p>
+            Displays TCP connections:
+        </p>
+
+        <pre><code>Get-NetTCPConnection</code></pre>
+
+        <p>You can filter for established connections:</p>
+
+        <pre><code>Get-NetTCPConnection |
+    Where-Object {$_.State -eq "Established"}</code></pre>
+
+        <p>
+            This can be useful during incident response or when investigating
+            unexpected network activity.
+        </p>
+    </section>
+
+
+    <!-- Firewall -->
+
+    <section>
+        <h2>Windows Firewall</h2>
+
+        <p>
+            PowerShell is also extremely useful for inspecting Windows Firewall configuration.
+        </p>
+
+        <h3>Get-NetFirewallProfile</h3>
+
+        <p>
+            Displays the status of the Windows Firewall profiles:
+        </p>
+
+        <pre><code>Get-NetFirewallProfile</code></pre>
+
+        <h3>Get-NetFirewallRule</h3>
+
+        <p>
+            Lists configured firewall rules:
+        </p>
+
+        <pre><code>Get-NetFirewallRule</code></pre>
+
+        <p>You can filter for enabled rules:</p>
+
+        <pre><code>Get-NetFirewallRule |
+    Where-Object {$_.Enabled -eq "True"}</code></pre>
+
+        <p>
+            These commands are useful when auditing whether firewall protections
+            are enabled and how traffic is being controlled.
+        </p>
+    </section>
+
+
+    <!-- Event Logs -->
+
+    <section>
+        <h2>Windows Event Logs</h2>
+
+        <p>
+            For cybersecurity professionals, one of the most important PowerShell
+            cmdlets is:
+        </p>
+
+        <pre><code>Get-WinEvent</code></pre>
+
+        <p>
+            It allows you to query Windows Event Logs directly from PowerShell.
+        </p>
+
+        <p>
+            For example, you can retrieve recent events from the Security log:
+        </p>
+
+        <pre><code>Get-WinEvent -LogName Security -MaxEvents 20</code></pre>
+
+        <p>
+            You can also filter events by Event ID:
+        </p>
+
+        <pre><code>Get-WinEvent -FilterHashtable @{
+    LogName = "Security"
+    Id = 4624
+}</code></pre>
+
+        <p>
+            Event ID <strong>4624</strong>, for example, is associated with
+            a successful logon.
+        </p>
+
+        <p>
+            Other security-relevant events can be investigated in the same way,
+            making <code>Get-WinEvent</code> extremely valuable for
+            <strong>SOC analysts, incident response, and security auditing</strong>.
+        </p>
+    </section>
+
+
+    <!-- Pipeline -->
+
+    <section>
+        <h2>The PowerShell Pipeline</h2>
+
+        <p>
+            One of the most important concepts to understand in PowerShell is the
+            <strong>pipeline</strong>:
+        </p>
+
+        <pre><code>|</code></pre>
+
+        <p>
+            The pipeline allows the output of one command to be passed directly
+            to another command.
+        </p>
+
+        <pre><code>Get-Process |
+    Where-Object {$_.CPU -gt 50} |
+    Select-Object Name, CPU</code></pre>
+
+        <div class="pipeline">
+            Get data → Filter data → Select information
+        </div>
+
+        <p>
+            This approach makes PowerShell commands highly flexible.
+        </p>
+    </section>
+
+
+    <!-- Filtering -->
+
+    <section>
+        <h2>Filtering with Where-Object</h2>
+
+        <p>
+            <code>Where-Object</code> allows you to filter objects based on a condition.
+        </p>
+
+        <pre><code>Get-Process |
+    Where-Object {$_.Name -eq "chrome"}</code></pre>
+
+        <p>Another example:</p>
+
+        <pre><code>Get-Service |
+    Where-Object {$_.Status -eq "Stopped"}</code></pre>
+
+        <p>
+            The <code>$_</code> variable represents the current object being processed
+            by the pipeline.
+        </p>
+    </section>
+
+
+    <!-- Select -->
+
+    <section>
+        <h2>Selecting Properties with Select-Object</h2>
+
+        <p>
+            Sometimes you don't need every property returned by a command.
+            You can select only the information you need:
+        </p>
+
+        <pre><code>Get-Process |
+    Select-Object Name, Id, CPU</code></pre>
+
+        <p>
+            This is particularly useful when creating reports or preparing data
+            for further analysis.
+        </p>
+    </section>
+
+
+    <!-- Sorting -->
+
+    <section>
+        <h2>Sorting Data with Sort-Object</h2>
+
+        <p>
+            You can sort objects based on one of their properties.
+        </p>
+
+        <pre><code>Get-Process |
+    Sort-Object CPU -Descending</code></pre>
+
+        <p>
+            This can help identify processes consuming the most CPU resources.
+        </p>
+    </section>
+
+
+    <!-- Export -->
+
+    <section>
+        <h2>Exporting Information</h2>
+
+        <p>
+            PowerShell becomes even more useful when the collected information
+            needs to be saved for later analysis.
+        </p>
+
+        <h3>Exporting to CSV</h3>
+
+        <pre><code>Get-Process |
+    Export-Csv processes.csv -NoTypeInformation</code></pre>
+
+        <h3>Exporting to a text file</h3>
+
+        <pre><code>Get-Process |
+    Out-File processes.txt</code></pre>
+
+        <h3>Converting to JSON</h3>
+
+        <pre><code>Get-Process |
+    ConvertTo-Json</code></pre>
+
+        <p>
+            These capabilities are especially useful when developing
+            <strong>security auditing scripts</strong>, since the collected
+            data can be transformed into structured reports.
+        </p>
+    </section>
+
+
+    <!-- Essential Cmdlets -->
+
+    <section>
+        <h2>Essential Cmdlets to Learn First</h2>
+
+        <p>
+            If you're learning PowerShell for
+            <strong>Windows administration, cybersecurity, SOC operations,
+            or security auditing</strong>, these are some of the commands
+            worth prioritizing:
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Cmdlet</th>
+                    <th>Main Purpose</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><code>Get-Command</code></td>
+                    <td>Discover commands</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-Help</code></td>
+                    <td>Get command documentation</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-Member</code></td>
+                    <td>Inspect object properties and methods</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-Process</code></td>
+                    <td>Inspect running processes</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-Service</code></td>
+                    <td>Inspect Windows services</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-WinEvent</code></td>
+                    <td>Analyze Windows Event Logs</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-LocalUser</code></td>
+                    <td>List local users</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-LocalGroupMember</code></td>
+                    <td>Inspect group membership</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-NetIPAddress</code></td>
+                    <td>Inspect IP addresses</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-NetTCPConnection</code></td>
+                    <td>Inspect network connections</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-NetFirewallProfile</code></td>
+                    <td>Inspect firewall profiles</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-NetFirewallRule</code></td>
+                    <td>Inspect firewall rules</td>
+                </tr>
+
+                <tr>
+                    <td><code>Get-CimInstance</code></td>
+                    <td>Query system information</td>
+                </tr>
+
+                <tr>
+                    <td><code>Where-Object</code></td>
+                    <td>Filter objects</td>
+                </tr>
+
+                <tr>
+                    <td><code>Select-Object</code></td>
+                    <td>Select properties</td>
+                </tr>
+
+                <tr>
+                    <td><code>Sort-Object</code></td>
+                    <td>Sort objects</td>
+                </tr>
+
+                <tr>
+                    <td><code>Export-Csv</code></td>
+                    <td>Export data to CSV</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+    <!-- Conclusion -->
+
+    <section>
+        <h2>Final Thoughts</h2>
+
+        <p>
+            You don't need to memorize every PowerShell cmdlet to become productive
+            with PowerShell. In fact, learning how to
+            <strong>discover commands, inspect objects, use the pipeline,
+            filter data, and export results</strong> is much more valuable.
+        </p>
+
+        <p>A good starting workflow is:</p>
+
+        <pre><code>Get-Command
+     ↓
+Get-Help
+     ↓
+Get-Member
+     ↓
+Get-* command
+     ↓
+Where-Object
+     ↓
+Select-Object
+     ↓
+Export-Csv</code></pre>
+
+        <p>
+            Once these concepts become familiar, you can start building more advanced
+            scripts for <strong>Windows security auditing, incident response,
+            system hardening, and SOC automation</strong>.
+        </p>
+
+        <p>
+            For professionals working with tools such as <strong>Wazuh</strong>,
+            PowerShell is particularly valuable because it can be used to collect
+            Windows security information, investigate events, inspect users and
+            processes, and automate checks that can later be monitored by a SIEM.
+        </p>
+    </section>
+
+    <center><small>©2026 MELO</small></center>
+  </body>
+</html>
