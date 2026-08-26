@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta name="description" content="Personal Website: general Mayhem">
+    <meta name="keywords" content="MELO, server, projects, retro, 80's, 90's, computers, PC, DOS, Windows 3.1, nostalgia, retro-modern, electronics, vintage, classic, github">
+    <meta name="author" content="MELO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    
+    <style>
+body {
+  font-family: 'Tahoma', monospace;
+  background-color: rgb(0, 0, 0);
+  background-image: url("../../images/wallpaper.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+} 
+.navbar {
+  overflow: hidden;
+  background-color: #fdff7f96;
+  background-image: linear-gradient(hsl(303, 100%, 38%), #ffffff00);
+  border-radius: 10px; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: bold;
+  text-shadow: 2px 2px #00000000;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  text-shadow: 2px 2px #00ff0d00;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: rgb(0, 0, 0);
+  background-color: #e7e43f;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #e7e43f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(104, 0, 95);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  text-shadow: 2px 2px rgba(128, 128, 128, 0);
+}
+
+.dropdown-content a:hover {
+  background-color: #ff48f05e;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Document Style Integrations */
+.doc-container {
+  text-align: left;
+  padding: 10px;
+  color: #fbffbe;
+}
+
+.doc-container h1 {
+  color: #00ffff;
+  border-bottom: 2px solid #0095a0;
+  padding-bottom: 5px;
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+.doc-container h2 {
+  color: #ff79c6;
+  border-bottom: 1px dashed #0095a0;
+  padding-bottom: 3px;
+  margin-top: 25px;
+  font-size: 1.2em;
+}
+
+.doc-container h3 {
+  color: #50fa7b;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1.05em;
+}
+
+.doc-container code {
+  background-color: #1a1c23;
+  color: #f1fa8c;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #50fa7b;
+  padding: 12px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.doc-container pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.function-block {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #00ffff;
+  padding: 12px 15px;
+  margin: 15px 0;
+}
+
+.note {
+  background-color: rgba(255, 184, 108, 0.15);
+  border-left: 4px solid #ffb86c;
+  color: #ffb86c;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+.doc-container ul {
+  padding-left: 20px;
+}
+
+.doc-container li {
+  margin-bottom: 4px;
+}
+</style> 
+    <title>MELO's World - Practical Guide to video.h</title>
+  </head>
+  <body style="color: #fbffbe;" vlink="#FF0000" link="#FF5733" alink="#FF5733">
+
+    <div class="navbar">
+      <a href="../../index.html"><img src="../../images/Home.png"><br>Home</a>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Vpc.png"><br>Servers <i class="fa fa-caret-down"></i></button>
+
+        <div class="dropdown-content"> 
+          <a href="computer/mycomputers.html">My Computers</a> 
+          <a href="computer/documents.html">Documents</a> 
+          <a href="computer/downloads.html">Downloads</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><img src="../../images/Modtech.png"><br>Projects <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content"> 
+          <a href="../myprojects.html">Software Projects</a> 
+          <a href="../documents.html">SOC Projects</a> 
+          <a href="../downloads.html">Miscellaneous</a>
+        </div>
+      </div>
+      <a href="links.html"><img src="../../images/Links.png"><br>Links</a>
+      <a href="mailto:m310@proton.me"><img src="../../images/Email.png"><br>E-mail</a> 
+    </div>
+
+      <center><br></center>
+
+      <hr>
+      <table style="width: 65%" border="2">
+        <tbody>
+          <tr align="center">
+            <td style="background-color: #0095a0e3;"><strong>.PS1 DDOS DEFENDER</strong></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgba(0, 23, 39, 0.7);">
+
+              <p>
+                <b><u>07/2026</u></b> - 
+
+              </p>
+            
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </section>
+    
+
+
+    
+    <center><small>©2026 MELO</small></center>
+    
+  </body>
+</html>
