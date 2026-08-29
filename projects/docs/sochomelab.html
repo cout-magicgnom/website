@@ -161,8 +161,29 @@ body {
 .doc-container li {
   margin-bottom: 4px;
 }
+
+.doc-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.doc-container table th, .doc-container table td {
+  border: 1px solid #30363d;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.doc-container table th {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+}
+
+.doc-container a {
+  color: #8be9fd;
+}
 </style> 
-    <title>MELO's World - Practical Guide to video.h</title>
+    <title>MELO's World - Soc-homelab (DIY)</title>
   </head>
   <body style="color: #fbffbe;" vlink="#FF0000" link="#FF5733" alink="#FF5733">
 
@@ -194,31 +215,482 @@ body {
       <center><br></center>
 
       <hr>
-      <table style="width: 65%" border="2">
-        <tbody>
-          <tr align="center">
-            <td style="background-color: #0095a0e3;"><strong>.PS1 DDOS DEFENDER</strong></td>
-          </tr>
-          <tr>
-            <td style="background-color: rgba(0, 23, 39, 0.7);">
 
-              <p>
-                <b><u>07/2026</u></b> - 
-
-              </p>
-            
-          </tr>
-        </tbody>
-      </table>
+      <div class="doc-container">
 
 
+<table style="width: 80%; margin: 0 auto;" border="2">
+      <tbody>
+        <tr align="center">
+          <td style="background-color: #0095a0e3;"><strong>SOC Homelab (DIY) Documentation</strong></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 23, 39, 0.85);">
+            <div class="doc-container">
+              <p><b><u>03/2026</u></b> - Soc homelab (DIY) Documentation</p>
 
-    </section>
-    
+        <div class="note">
+          <strong>⚠️ WARNING</strong><br>
+          The following content is for educational purposes only and is not intended to teach how to hack enterprise infrastructure. Do good hack, not bad hack +🤠.
+        </div>
 
+        <h2>🧱 Architecture</h2>
+        <pre><code>Wazuh Security Lab
+│
+├── 01-file-integrity
+├── 02-ssh-bruteforce
+├── 03-user-creation
+├── 04-privilege-escalation
+├── 05-service-manipulation
+├── 06-permission-change
+└── 07-attack-timeline</code></pre>
 
-    
-    <center><small>©2026 MELO</small></center>
-    
-  </body>
-</html>
+        <h3>Lab topology (Kali → Windows → Wazuh)</h3>
+        <pre><code>┌──────────────────┐
+│    Kali Linux    │
+│                  │
+│   RDP Client     │
+└────────┬─────────┘
+         │
+         │ RDP / TCP 3389
+         ▼
+┌──────────────────────────┐
+│      Windows 11 Pro      │
+│                          │
+│    Wazuh Agent           │
+│          │               │
+│          ▼               │
+│    C:\WazuhLab\          │
+│          │               │
+│       FIM Monitor        │
+└──────────┬───────────────┘
+           │
+           │ Wazuh Agent
+           ▼
+┌──────────────────────────┐
+│      Wazuh Manager       │
+│                          │
+│    File Integrity        │
+│       Monitoring         │
+└──────────┬───────────────┘
+           │
+           ▼
+┌──────────────────────────┐
+│      Wazuh Dashboard     │
+└──────────────────────────┘</code></pre>
+
+        <p><strong>Components</strong></p>
+        <ul>
+          <li><strong>Kali Linux</strong> — used as the remote client in the simulation.</li>
+          <li><strong>Windows 11 Pro</strong> — the monitored endpoint.</li>
+          <li><strong>Wazuh Agent</strong> — installed on the Windows endpoint.</li>
+          <li><strong>Wazuh Manager</strong> — receives and analyzes telemetry from the endpoint.</li>
+          <li><strong>Wazuh Dashboard</strong> — used to investigate the generated events.</li>
+        </ul>
+
+        <h2>📎 Setting Up Wazuh SIEM (VM Box)</h2>
+        <ol>
+          <li><a href="https://packages.wazuh.com/4.x/vm/wazuh-4.14.7.ova">Click here to download</a> the latest version of Wazuh VM from their official <a href="https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html">website</a>.</li>
+          <li>Once the download is finished, find the <code>wazuh.ova</code> file and double-click it.</li>
+          <li>The machine comes with every configuration pre-installed — just hit <strong>Finish</strong> in VirtualBox.</li>
+          <li>Make sure the VM's network device is set to <strong>Bridge mode</strong>, and you're good to go.</li>
+          <li>When the server starts up, check that the services are running:</li>
+        </ol>
+        <pre><code>systemctl status wazuh-indexer
+systemctl status wazuh-dashboard
+systemctl status wazuh-manager</code></pre>
+        <p>6. Open the dashboard in your browser: <code>https://&lt;WAZUH-IP&gt;</code></p>
+
+        <h2>🕵️‍♀️ Setting Up a Wazuh Agent (Windows 10/11)</h2>
+        <ol>
+          <li>When opening the dashboard for the first time, the first option is to add a new agent.</li>
+          <li>On the <strong>Deploy new agent</strong> tab, select your Operating System and <strong>CHECK THE SERVER ADDRESS (Wazuh IP)</strong>.</li>
+          <li>Copy/paste the two generated commands (1st installs the Wazuh agent packages, 2nd starts the Wazuh service).</li>
+        </ol>
+        <div class="note">
+          <strong>NOTE:</strong> When using a VM, UFW is not required, so you shouldn't run into "closed door" issues.
+        </div>
+        <div class="note">
+          <strong>TIP:</strong> Don't forget to reserve an IP address for your Wazuh server and agents on your router/modem's DHCP.
+        </div>
+
+        <h2>🗂️ 01 — File Integrity Monitoring (FIM)</h2>
+        <p>A simple, step-by-step guide to add a specific folder on a Windows agent to Wazuh's File Integrity Monitoring (FIM) and verify that changes generate events.</p>
+        <p>This guide uses <code>C:\FIM-Test</code> as the example folder.</p>
+
+        <h3>1. Create the Folder in Windows</h3>
+        <p>Open PowerShell as Administrator:</p>
+        <pre><code>New-Item -ItemType Directory -Path "C:\FIM-Test"</code></pre>
+        <p>Verify it was created:</p>
+        <pre><code>Get-Item "C:\FIM-Test"</code></pre>
+        <p>You should see the folder's information printed out.</p>
+
+        <h3>2. Locate ossec.conf</h3>
+        <p>On the Windows agent, open:</p>
+        <pre><code>C:\Program Files (x86)\ossec-agent\ossec.conf</code></pre>
+        <p>If you installed the agent in a different directory, look for the <code>ossec.conf</code> file inside the installation folder.</p>
+        <p>Back up the file before making changes:</p>
+        <pre><code>Copy-Item `
+  "C:\Program Files (x86)\ossec-agent\ossec.conf" `
+  "C:\Program Files (x86)\ossec-agent\ossec.conf.bak"</code></pre>
+
+        <h3>3. Locate the &lt;syscheck&gt; Configuration</h3>
+        <p>Inside <code>ossec.conf</code>, look for:</p>
+        <pre><code>&lt;syscheck&gt;</code></pre>
+        <p>You will likely already have a configuration similar to:</p>
+        <pre><code>&lt;syscheck&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+    ...
+&lt;/syscheck&gt;</code></pre>
+        <div class="note">
+          <strong>NOTE:</strong> Don't create a separate &lt;syscheck&gt; block if one already exists. Add the new configuration inside the existing block.
+        </div>
+
+        <h3>4. Add the Folder</h3>
+        <p>To get started, add:</p>
+        <pre><code>&lt;directories&gt;C:\FIM-Test&lt;/directories&gt;</code></pre>
+        <p>For example:</p>
+        <pre><code>&lt;syscheck&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+
+    &lt;frequency&gt;300&lt;/frequency&gt;
+
+    &lt;scan_on_start&gt;yes&lt;/scan_on_start&gt;
+
+    &lt;directories&gt;C:\FIM-Test&lt;/directories&gt;
+&lt;/syscheck&gt;</code></pre>
+        <p>The <code>&lt;directories&gt;</code> parameter defines which directories Syscheck/FIM should monitor.</p>
+
+        <h3>5. Enable Real-Time Monitoring (Optional)</h3>
+        <p>For a lab environment, it's recommended to use <code>realtime="yes"</code>:</p>
+        <pre><code>&lt;directories realtime="yes"&gt;C:\FIM-Test&lt;/directories&gt;</code></pre>
+        <p>So the full block becomes:</p>
+        <pre><code>&lt;syscheck&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+
+    &lt;frequency&gt;300&lt;/frequency&gt;
+
+    &lt;scan_on_start&gt;yes&lt;/scan_on_start&gt;
+
+    &lt;directories realtime="yes"&gt;C:\FIM-Test&lt;/directories&gt;
+&lt;/syscheck&gt;</code></pre>
+        <p>This way, you don't need to wait for the next scheduled scan to test changes. Wazuh supports real-time directory monitoring on Windows.</p>
+
+        <h3>6. Save the File</h3>
+        <p>Save <code>ossec.conf</code>. Before restarting the agent, double-check that you haven't introduced any XML syntax errors.</p>
+
+        <h3>7. Restart the Agent</h3>
+        <p>Open PowerShell as Administrator:</p>
+        <pre><code>Restart-Service -Name wazuh</code></pre>
+        <p>Verify the service status:</p>
+        <pre><code>Get-Service wazuh</code></pre>
+        <p>Expected output:</p>
+        <pre><code>Status   Name
+------   ----
+Running  wazuh</code></pre>
+
+        <h3>8. Run a Test</h3>
+        <p>Create a file inside the folder:</p>
+        <pre><code>New-Item -ItemType File -Path "C:\FIM-Test\teste.txt"</code></pre>
+        <p>Write some content to it:</p>
+        <pre><code>Set-Content `
+    -Path "C:\FIM-Test\teste.txt" `
+    -Value "My first FIM test"</code></pre>
+        <p>Modify it again:</p>
+        <pre><code>Set-Content `
+    -Path "C:\FIM-Test\teste.txt" `
+    -Value "Modified file"</code></pre>
+        <p>And finally, delete it:</p>
+        <pre><code>Remove-Item "C:\FIM-Test\teste.txt"</code></pre>
+        <p>With <code>realtime="yes"</code>, these changes should be detected by FIM almost immediately.</p>
+
+        <h3>9. Check the Event in the Wazuh Dashboard</h3>
+        <p>In the Dashboard, look for events related to the agent. You should find Syscheck/FIM events related to the file:</p>
+        <pre><code>C:\FIM-Test\teste.txt</code></pre>
+        <p>One particularly useful field is <code>syscheck.path</code>, which should show:</p>
+        <pre><code>C:\FIM-Test\teste.txt</code></pre>
+        <p>Also look for <code>syscheck.event</code>, which may show values such as:</p>
+        <ul>
+          <li><code>added</code></li>
+          <li><code>modified</code></li>
+          <li><code>deleted</code></li>
+        </ul>
+
+        <h3>10. Next Step: Enable Who-Data</h3>
+        <p>Once the basic test is working, the recommended next step is:</p>
+        <pre><code>&lt;directories realtime="yes" whodata="yes"&gt;
+    C:\FIM-Test
+&lt;/directories&gt;</code></pre>
+        <p>This provides additional information about who made the change and which process was involved, making the experiment much more interesting from a security standpoint.</p>
+        <p>For example, instead of simply finding out:</p>
+        <pre><code>C:\FIM-Test\teste.txt
+        ↓
+     modified</code></pre>
+        <p>you can get information like:</p>
+        <pre><code>File:    teste.txt
+Event:   modified
+User:    Administrator
+Process: powershell.exe</code></pre>
+
+        <h3>Full Flow</h3>
+        <pre><code>Windows Agent
+     │
+     │ file created/modified/deleted
+     ▼
+C:\FIM-Test
+     │
+     ▼
+Syscheck / FIM
+     │
+     ▼
+Wazuh Agent
+     │
+     ▼
+Wazuh Manager
+     │
+     ▼
+Wazuh Dashboard
+     │
+     ▼
+File Integrity Event</code></pre>
+
+        <div class="note">
+          <strong>TIP:</strong> Recommendation: For your lab, start with just <code>C:\FIM-Test</code> + <code>realtime="yes"</code>. Once you've confirmed events are coming through, add <code>whodata</code>, and only then move on to real folders such as <code>C:\Windows\System32</code> or Registry keys. This avoids generating a huge volume of events before you understand the basic workflow.
+        </div>
+
+        <h2>🖥️ Extended Lab: Simulating Remote Activity via RDP</h2>
+        <p>This section expands the basic FIM setup into a full scenario: a Kali Linux machine connects remotely to a Windows 11 Pro endpoint via RDP and triggers file events that Wazuh detects, giving the exercise a more realistic "attacker/analyst" flavor.</p>
+
+        <h3>1. Preparing Windows 11 Pro</h3>
+        <p>The first step is to configure the Windows endpoint to accept Remote Desktop connections.</p>
+        <p>Make sure the system is running <strong>Windows 11 Pro</strong>, since the traditional Remote Desktop server functionality is not available in Windows 11 Home.</p>
+        <p>Navigate to:</p>
+        <pre><code>Settings
+└── System
+    └── Remote Desktop</code></pre>
+        <p>Enable:</p>
+        <pre><code>Remote Desktop: On</code></pre>
+        <p>It's recommended to create a dedicated local account for the lab rather than using your primary Windows account:</p>
+        <pre><code>Username: lab-rdp</code></pre>
+        <p>Using a dedicated account makes the experiment easier to isolate and document.</p>
+
+        <h3>2. Verify the RDP Service</h3>
+        <p>The Windows Remote Desktop service is called <code>TermService</code>.</p>
+        <p>From an elevated PowerShell session:</p>
+        <pre><code>Get-Service TermService</code></pre>
+        <p>Expected result:</p>
+        <pre><code>Status   Name
+------   ----
+Running  TermService</code></pre>
+        <p>If necessary:</p>
+        <pre><code>Start-Service TermService
+Set-Service TermService -StartupType Automatic</code></pre>
+
+        <h3>3. Verify TCP Port 3389</h3>
+        <p>Remote Desktop normally uses TCP port <code>3389</code>. To verify Windows is listening:</p>
+        <pre><code>Get-NetTCPConnection -LocalPort 3389</code></pre>
+        <p>Another option:</p>
+        <pre><code>netstat -ano | findstr :3389</code></pre>
+        <p>The important part is seeing a listener on port <code>3389</code>.</p>
+
+        <h3>4. Configure Windows Firewall</h3>
+        <p>Windows normally creates the appropriate firewall rules when Remote Desktop is enabled. They can be checked with:</p>
+        <pre><code>Get-NetFirewallRule -DisplayGroup "Remote Desktop"</code></pre>
+        <p>If necessary, enable them with:</p>
+        <pre><code>Enable-NetFirewallRule -DisplayGroup "Remote Desktop"</code></pre>
+        <p>For a homelab, it's important to keep the firewall enabled rather than disabling it entirely just to make the connection work.</p>
+
+        <h3>5. Find the Windows IP Address</h3>
+        <p>From PowerShell:</p>
+        <pre><code>ipconfig</code></pre>
+        <p>For this example, the lab uses:</p>
+        <pre><code>Windows 11 Pro  →  192.168.56.20
+Kali Linux      →  192.168.56.10</code></pre>
+        <p>Both machines need network connectivity to each other.</p>
+
+        <h3>6. Test Connectivity from Kali</h3>
+        <p>From Kali Linux:</p>
+        <pre><code>ping 192.168.56.20</code></pre>
+        <p>ICMP may be blocked by Windows Firewall, so a failed ping does not necessarily mean RDP won't work. A better test for this scenario is checking TCP port 3389:</p>
+        <pre><code>nc -zv 192.168.56.20 3389</code></pre>
+        <p>A successful connection looks like:</p>
+        <pre><code>Connection to 192.168.56.20 3389 port [tcp/ms-wbt-server] succeeded!</code></pre>
+
+        <h3>7. Install an RDP Client on Kali</h3>
+        <p>Install FreeRDP:</p>
+        <pre><code>sudo apt update
+sudo apt install freerdp3-x11</code></pre>
+        <p>Verify the installation:</p>
+        <pre><code>xfreerdp3 /version</code></pre>
+
+        <h3>8. Establish the RDP Session</h3>
+        <p>Access the Windows machine from Kali:</p>
+        <pre><code>xfreerdp3 /v:192.168.56.20 /u:lab-rdp</code></pre>
+        <p>For a more convenient lab environment:</p>
+        <pre><code>xfreerdp3 /v:192.168.56.20 /u:lab-rdp /dynamic-resolution</code></pre>
+        <p>After authentication, the Windows desktop should appear inside the Kali environment. At this point, the remote access portion of the lab is complete.</p>
+
+        <h3>9. Creating the FIM Test Directory</h3>
+        <p>Now we need something for Wazuh to monitor. On Windows:</p>
+        <pre><code>New-Item -ItemType Directory -Path "C:\WazuhLab"
+Set-Content -Path "C:\WazuhLab\test.txt" -Value "Original file"</code></pre>
+        <p>The directory now looks like:</p>
+        <pre><code>C:\
+└── WazuhLab\
+    └── test.txt</code></pre>
+        <p>This directory will be the controlled environment for the FIM experiments.</p>
+
+        <h3>10. Configuring Wazuh FIM</h3>
+        <p>The Wazuh Agent configuration file on Windows is typically located at:</p>
+        <pre><code>C:\Program Files (x86)\ossec-agent\ossec.conf</code></pre>
+        <p>Depending on the installation, the path may instead be:</p>
+        <pre><code>C:\Program Files\ossec-agent\ossec.conf</code></pre>
+        <p>Inside the <code>&lt;syscheck&gt;</code> configuration, add the directory:</p>
+        <pre><code>&lt;syscheck&gt;
+    &lt;directories realtime="yes"&gt;C:\WazuhLab&lt;/directories&gt;
+&lt;/syscheck&gt;</code></pre>
+        <p>The <code>realtime="yes"</code> option is useful here because it allows Wazuh to monitor changes in real time.</p>
+
+        <h3>11. Restart the Wazuh Agent</h3>
+        <p>After modifying the configuration, restart the agent:</p>
+        <pre><code>Restart-Service WazuhSvc
+Get-Service WazuhSvc</code></pre>
+        <p>Expected:</p>
+        <pre><code>Status   Name
+------   ----
+Running  WazuhSvc</code></pre>
+
+        <h3>12. Test File Integrity Monitoring</h3>
+        <p>Before using Kali, it's useful to verify that FIM is working locally.</p>
+        <pre><code>Add-Content -Path "C:\WazuhLab\test.txt" -Value "First modification"</code></pre>
+        <p>In the Wazuh Dashboard, search for events related to <code>syscheck</code>. The event should provide information about the affected file and the detected modification.</p>
+
+        <h3>13. Simulating Remote Activity</h3>
+        <p>Now the actual lab scenario begins. Instead of modifying the file directly from the Windows console, connect to Windows remotely from Kali:</p>
+        <pre><code>xfreerdp3 /v:192.168.56.20 /u:lab-rdp /dynamic-resolution</code></pre>
+        <p>Once connected, open <code>C:\WazuhLab\test.txt</code>.</p>
+        <p>Initially:</p>
+        <pre><code>Original file</code></pre>
+        <p>Modify it to:</p>
+        <pre><code>Original file
+
+This line was added during the security lab simulation.</code></pre>
+        <p>Save the file.</p>
+
+        <h3>14. What Wazuh Sees</h3>
+        <p>From the endpoint's perspective, the important event is not necessarily that the user connected via RDP — it's the file modification itself:</p>
+        <pre><code>File modification
+        ↓
+C:\WazuhLab\test.txt
+        ↓
+Wazuh FIM
+        ↓
+Wazuh Agent
+        ↓
+Wazuh Manager
+        ↓
+Dashboard</code></pre>
+        <p>This is the core concept behind the lab: a file that was previously in one state has changed, and Wazuh can provide telemetry about that change.</p>
+
+        <h3>15. Testing File Creation</h3>
+        <p>Create another file through the RDP session:</p>
+        <pre><code>New-Item C:\WazuhLab\malware-test.txt</code></pre>
+        <div class="note">
+          The file does not contain real malware — it's simply a test artifact used to reproduce the type of event that could occur during an intrusion.
+        </div>
+        <p>For example:</p>
+        <pre><code>SIMULATED MALICIOUS FILE
+No executable code.</code></pre>
+        <p>Wazuh should detect the new file:</p>
+        <pre><code>File Created → FIM Event → Wazuh</code></pre>
+
+        <h3>16. Testing File Modification</h3>
+        <p>Modify the same file:</p>
+        <pre><code>Add-Content C:\WazuhLab\malware-test.txt "Simulated modification"</code></pre>
+        <p>This generates another FIM event:</p>
+        <pre><code>File Modified → Wazuh FIM</code></pre>
+
+        <h3>17. Testing File Deletion</h3>
+        <p>Finally:</p>
+        <pre><code>Remove-Item C:\WazuhLab\malware-test.txt</code></pre>
+        <p>This allows the lab to demonstrate three different file integrity events:</p>
+        <pre><code>CREATE → MODIFY → DELETE</code></pre>
+        <p>These events provide a simple but useful foundation for learning how endpoint telemetry can be used during an investigation.</p>
+
+        <h2>🧠 Thinking Like a SOC Analyst</h2>
+        <p>The interesting part of this lab isn't simply seeing that a file changed — it's asking:</p>
+        <p><strong>Why did this file change?</strong></p>
+        <p>Example event context:</p>
+        <pre><code>Event: File modified
+Host:  Windows 11 Pro
+File:  C:\WazuhLab\test.txt
+Time:  2026-08-29 12:XX:XX</code></pre>
+        <p>A SOC analyst would then want additional context, such as:</p>
+        <ul>
+          <li>Who was logged into the machine?</li>
+          <li>Was there an RDP session?</li>
+          <li>Was the modification expected?</li>
+          <li>What process modified the file?</li>
+          <li>Was the file newly created?</li>
+          <li>Did other files change?</li>
+          <li>Did the same user perform other suspicious actions?</li>
+          <li>Were there authentication anomalies?</li>
+          <li>Did other security controls generate alerts?</li>
+        </ul>
+        <p>This is where FIM becomes more useful when combined with other telemetry sources.</p>
+
+        <h2>🔁 From FIM to Incident Response</h2>
+        <p>The lab can eventually be expanded into a basic incident-response workflow:</p>
+        <pre><code>                 ┌───────────────┐
+                 │ Remote Access │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ File Created  │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ FIM Detection │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ Investigation │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │    Response   │
+                 └───────────────┘</code></pre>
+        <p>The next step would be integrating <strong>Wazuh Active Response</strong>. For example, a controlled lab could detect the creation of a specific test file and trigger a predefined response.</p>
+        <div class="note">
+          <strong>⚠️ WARNING:</strong> This should be implemented carefully — automatically deleting or modifying files based only on a FIM event can generate false positives in a real environment.
+        </div>
+
+        <h2>✅ Why This Lab Is Useful</h2>
+        <p>This project demonstrates several concepts that are relevant to a SOC environment:</p>
+        <table>
+          <tbody>
+            <tr><th>Concept</th><th>Description</th></tr>
+            <tr><td><strong>Endpoint Monitoring</strong></td><td>The Windows machine acts as a monitored endpoint.</td></tr>
+            <tr><td><strong>File Integrity Monitoring</strong></td><td>Wazuh detects changes to files and directories.</td></tr>
+            <tr><td><strong>Remote Access</strong></td><td>Kali simulates a remote system connecting to the Windows endpoint through RDP.</td></tr>
+            <tr><td><strong>Security Telemetry</strong></td><td>Modifications generate telemetry that can be investigated.</td></tr>
+            <tr><td><strong>Detection Engineering</strong></td><td>The next stage is creating rules that distinguish ordinary file changes from suspicious activity.</td></tr>
+            <tr><td><strong>Incident Response</strong></td><td>Active Response can eventually be introduced to demonstrate automated containment or remediation.</td></tr>
+          </tbody>
+        </table>
+
+        <h2>📚 References</h2>
+        <p>
+          (PT-BR) → <a href="https://www.youtube.com/watch?v=ZvfSGRnfYfo&t=334s">YouTube</a><br>
+          (EN) → <a href="https://www.youtube.com/watch?v=3CaG2GI1kn0&t=151s">YouTube</a>
+        </p>
+        <div class="note">
+          For more information, visit <a href="https://cout-magicgnom.github.io/website/projects/documents.html">my website</a> for the full vulnerabilities walkthrough.
+        </div>
+
+      </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
